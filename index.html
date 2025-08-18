@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معهد الرسول الأعظم (ص) التقني</title>
+    <title> ( beta 3) معهد الرسول الأعظم (ص) التقني</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -115,7 +115,8 @@
                 <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="p-8">
                         <div class="text-center mb-8">
-                                                        <h2 class="mt-4 text-2xl font-bold text-gray-800">اختر طريقة الدخول</h2>
+                            <h2 class="mt-4 text-2xl font-bold text-gray-800">مرحباً بك في نظامنا التعليمي</h2>
+                            <p class="text-gray-600 mt-2">يرجى اختيار الدخول كطالب أو أستاذ للوصول إلى المحتوى</p>
                         </div>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -178,12 +179,57 @@
             </div>
         </div>
         
-        <!-- Footer -->
-        <footer class="bg-gray-800 text-white py-6">
-            <div class="container mx-auto px-4 text-center">
-                <p>© 2025 معاهد المهدي. جميع الحقوق محفوظة.</p>
+        <!-- Info Section (Mini Toggle at Top) -->
+        <div class="fixed top-4 right-4 z-50">
+            <button id="info-toggle" class="bg-blue-700 text-white p-2 rounded-full shadow-lg hover:bg-blue-800 transition-colors">
+                <i class="fas fa-info-circle text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Info Content (Popup Modal) -->
+        <div id="info-content" class="fixed top-16 right-4 bg-white rounded-xl shadow-xl p-6 w-80 z-50 hidden border border-gray-200">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-blue-700 text-lg">معلومات عن الموقع</h3>
+                <button id="info-close" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-        </footer>
+            <div class="grid grid-cols-1 gap-4 max-h-96 overflow-y-auto">
+                <div>
+                    <h4 class="font-bold text-blue-600 mb-1">عن المعهد</h4>
+                    <p class="text-gray-600 text-sm">
+                        معهد الرسول الأعظم (ص) التقني هو مؤسسة تعليمية متخصصة في تقديم التعليم التقني والمهني بجودة عالية.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-blue-600 mb-1">أهدافنا</h4>
+                    <ul class="text-gray-600 text-sm list-disc pr-4 space-y-1">
+                        <li>تقديم تعليم تقني متطور</li>
+                        <li>إعداد كوادر مؤهلة للسوق</li>
+                        <li>ربط التعليم بالتطبيقات العملية</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-blue-600 mb-1">التخصصات</h4>
+                    <ul class="text-gray-600 text-sm list-disc pr-4 space-y-1">
+                        <li>العناية التمريضية</li>
+                        <li>المحاسبة والمعلوماتية</li>
+                        <li>فنون الإعلان</li>
+                        <li>التربية الحضانية</li>
+                        <li>تكنولوجيا المعلوماتية</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-blue-600 mb-1">تواصل معنا</h4>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li><i class="fas fa-phone ml-2"></i> 00961-3-123456</li>
+                        <li><i class="fas fa-envelope ml-2"></i> info@institute.edu</li>
+                        <li><i class="fas fa-map-marker-alt ml-2"></i> شارع التعليم، بيروت</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
     </div>
     
     <!-- Student Page -->
@@ -541,6 +587,21 @@
         
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize info section toggle
+            const infoToggle = document.getElementById('info-toggle');
+            const infoContent = document.getElementById('info-content');
+            const infoClose = document.getElementById('info-close');
+            
+            if (infoToggle && infoContent) {
+                infoToggle.addEventListener('click', function() {
+                    infoContent.classList.toggle('hidden');
+                });
+                
+                infoClose.addEventListener('click', function() {
+                    infoContent.classList.add('hidden');
+                });
+            }
+            
             // Initialize dropdowns for student page
             const studentSpecialization = document.getElementById('student-specialization');
             const studentGrade = document.getElementById('student-grade');
@@ -1115,4 +1176,4 @@
         }
     </script>
 </body>
-  </html>
+    </html>  
