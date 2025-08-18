@@ -13,9 +13,14 @@
             font-family: 'Tajawal', sans-serif;
         }
         
+        .file-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
         .file-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(2px);
+            background-color: rgba(255, 255, 255, 0.8);
         }
         
         .sidebar {
@@ -58,6 +63,24 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.3; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .animate-pulse {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
         .animate-fadeIn {
             animation: fadeIn 0.8s ease-out forwards;
         }
@@ -98,9 +121,9 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 scroll-smooth">
     <!-- Main Index Page -->
-    <div id="index-page" class="min-h-screen flex flex-col">
+    <div id="index-page" class="min-h-screen flex flex-col animate-fadeIn">
         <!-- Header -->
         <header class="bg-blue-800 text-white py-6 shadow-lg">
             <div class="container mx-auto px-4 text-center">
@@ -126,7 +149,7 @@
                                     <i class="fas fa-user-graduate text-5xl text-blue-600 mb-4"></i>
                                     <h3 class="text-xl font-semibold text-gray-800">الدخول كطالب</h3>
                                     <p class="mt-2 text-gray-600">تصفح المواد التعليمية بدون الحاجة لتسجيل الدخول</p>
-                                    <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                    <button class="mt-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                                         الدخول الآن
                                     </button>
                                 </div>
@@ -150,7 +173,7 @@
         </main>
         
         <!-- Teacher Login Modal -->
-        <div id="teacher-login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div id="teacher-login-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden transition-opacity duration-300 opacity-0">
             <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-xl font-bold text-gray-800">تسجيل دخول الأستاذ</h3>
@@ -319,13 +342,7 @@
                 </div>
             </div>
         </main>
-        
-        <!-- Footer -->
-        <footer class="bg-gray-800 text-white py-6">
-            <div class="container mx-auto px-4 text-center">
-                <p>© 2023 معاهد المهدي. جميع الحقوق محفوظة.</p>
-            </div>
-        </footer>
+   
     </div>
     
     <!-- Teacher Page -->
@@ -511,13 +528,7 @@
                     </div>
                 </div>
             </main>
-            
-            <!-- Footer -->
-            <footer class="bg-gray-800 text-white py-6">
-                <div class="container mx-auto px-4 text-center">
-                    <p>© 2023 معاهد المهدي. جميع الحقوق محفوظة.</p>
-                </div>
-            </footer>
+        
         </div>
     </div>
     
@@ -783,11 +794,15 @@
         }
         
         function showTeacherLogin() {
-            document.getElementById('teacher-login-modal').classList.remove('hidden');
+            const modal = document.getElementById('teacher-login-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.add('opacity-100'), 10);
         }
         
         function hideTeacherLogin() {
-            document.getElementById('teacher-login-modal').classList.add('hidden');
+            const modal = document.getElementById('teacher-login-modal');
+            modal.classList.remove('opacity-100');
+            setTimeout(() => modal.classList.add('hidden'), 300);
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         }
